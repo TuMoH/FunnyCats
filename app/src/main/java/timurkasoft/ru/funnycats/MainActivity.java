@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
                 int count = 0;
                 for (Photo photo : photoList) {
-                    if (++count > 10) break;
+                    if (++count > 20) break;
 
                     String url = getString(R.string.url_format,
                             photo.getFarm(), photo.getServer(), photo.getId(), photo.getSecret());
