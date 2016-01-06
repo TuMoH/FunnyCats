@@ -1,0 +1,7 @@
+<resources>
+    <string name="connection_failed">Для загрузки котиков необходим интернет</string>
+    <string name="permissions_denied">Для загрузки котиков необходим интернет</string>
+    <string name="connect">Включить</string>
+    <string name="ask_permissons">Разрешить</string>
+    <string name="send_to">Поделиться</string>
+</resources>

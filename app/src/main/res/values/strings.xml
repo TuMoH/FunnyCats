@@ -1,6 +1,9 @@
 <resources>
-    <string name="app_name">FunnyCats</string>
-    <string name="permissions_denied">Для загрузки котиков необходим интернет</string>
-    <string name="ask_permissons">Разрешить</string>
-    <string name="url_format">https://farm%1$s.staticflickr.com/%2$s/%3$s_%4$s.jpg</string>
+    <string name="app_name" translatable="false">FunnyCats</string>
+    <string name="connection_failed">Internet connection error</string>
+    <string name="permissions_denied">Internet permission denied</string>
+    <string name="connect">Enable</string>
+    <string name="ask_permissons">Grant</string>
+    <string name="send_to">Share via</string>
+    <string name="url_format" translatable="false">https://farm%1$s.staticflickr.com/%2$s/%3$s_%4$s.jpg</string>
 </resources>
