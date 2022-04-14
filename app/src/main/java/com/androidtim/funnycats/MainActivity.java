@@ -1,4 +1,4 @@
-package timurkasoft.ru.funnycats;
+package com.androidtim.funnycats;
 
 import android.Manifest;
 import android.content.Intent;
@@ -7,22 +7,21 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.viewpager.widget.ViewPager;
+
 import com.flickr4java.flickr.Flickr;
+import com.flickr4java.flickr.FlickrException;
 import com.flickr4java.flickr.REST;
 import com.flickr4java.flickr.photos.Photo;
 import com.flickr4java.flickr.photos.PhotoList;
 import com.flickr4java.flickr.photos.SearchParameters;
-
-import org.scribe.exceptions.OAuthConnectionException;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -80,18 +79,14 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_INTERNET_PERMISSION
                 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             loadUrls();
         } else {
             Snackbar.make(viewPager, R.string.permissions_denied, Snackbar.LENGTH_INDEFINITE)
-                    .setAction(R.string.ask_permissons, new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            askPermissions();
-                        }
-                    })
+                    .setAction(R.string.ask_permissons, v -> askPermissions())
                     .setActionTextColor(Color.GREEN)
                     .show();
         }
@@ -147,15 +142,10 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
                     urls.add(url);
                 }
                 return true;
-            } catch (OAuthConnectionException e) {
+            } catch (FlickrException e) {
                 e.printStackTrace();
                 Snackbar.make(viewPager, R.string.connection_failed, Snackbar.LENGTH_INDEFINITE)
-                        .setAction(R.string.connect, new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                startActivity(new Intent(Settings.ACTION_SETTINGS));
-                            }
-                        })
+                        .setAction(R.string.connect, v -> startActivity(new Intent(Settings.ACTION_SETTINGS)))
                         .setActionTextColor(Color.GREEN)
                         .show();
             } catch (Exception e) {
@@ -175,39 +165,5 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
             }
         }
     }
-
-//    private class ShareTask extends AsyncTask<String, Void, File> {
-//        @Override
-//        protected File doInBackground(String... params) {
-//            try {
-//                return Glide.with(MainActivity.this)
-//                        .load(params[0])
-//                        .downloadOnly(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
-//                        .get();
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//                return null;
-//            }
-//        }
-//
-//        @Override
-//        protected void onPostExecute(File result) {
-//            if (result == null) {
-//                return;
-//            }
-//            String path = null;
-//            try {
-//                path = MediaStore.Images.Media.insertImage(getContentResolver(),
-//                        result.getPath(), "Image Description", null);
-//            } catch (FileNotFoundException e) {
-//                e.printStackTrace();
-//            }
-//            Uri uri = Uri.parse(path);
-//            Intent intent = new Intent(Intent.ACTION_SEND);
-//            intent.setType("image/*");
-//            intent.putExtra(Intent.EXTRA_STREAM, uri);
-//            startActivity(Intent.createChooser(intent, getResources().getText(R.string.send_to)));
-//        }
-//    }
 
 }
