@@ -1,4 +1,4 @@
-package com.androidtim.funnycats;
+package timurkasoft.ru.funnycats;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;

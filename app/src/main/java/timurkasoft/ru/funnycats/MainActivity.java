@@ -1,4 +1,4 @@
-package com.androidtim.funnycats;
+package timurkasoft.ru.funnycats;
 
 import android.Manifest;
 import android.content.Intent;

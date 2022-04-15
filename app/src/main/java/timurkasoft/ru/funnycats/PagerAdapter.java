@@ -1,4 +1,4 @@
-package com.androidtim.funnycats;
+package timurkasoft.ru.funnycats;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
